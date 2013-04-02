@@ -5,7 +5,6 @@ Created on Mar 30, 2013
 '''
 
 import networkx as nx
-from classes.graph import Graph
 
 class Cluster():
     '''
@@ -17,10 +16,15 @@ class Cluster():
         '''
         Constructor
         '''
-        node_list = []
+        self.node_list = []
         
-    def add_node_to_cluster(self, ID):
+    def add_node(self, ID):
         '''
         Adds a node's ID to the list of a cluster.
         '''
         self.node_list.append(ID)
+        
+    def remove_node(self, ID):
+        if not self.node_list.__contains__(ID):
+            raise ValueError
+        self.node_list.remove(ID)
