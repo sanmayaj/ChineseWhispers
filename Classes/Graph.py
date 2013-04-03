@@ -24,31 +24,31 @@ class Graph():
     '''
     Creates a graph using Networkx Library.
     '''
-    graph = nx.Graph()
+    graf = nx.Graph()
     IDAllotter = IDClass()
 
     def __init__(self):
         '''
         Constructor
         '''
-        self.graph = nx.Graph()
-        self.graph.clear()
+        self.graf = nx.Graph()
+        self.graf.clear()
         self.IDAllotter = IDClass()
     
     def create_node(self, node_data):
-        self.graph.add_node(node_data, { 'label' : self.IDAllotter.allot_id() })
+        self.graf.add_node(node_data, { 'label' : self.IDAllotter.allot_id() })
         
     def create_edge(self, node1, node2, weight = None):
         if weight:
-            self.graph.add_weighted_edges_from( [ (node1, node2, weight) ] )
+            self.graf.add_weighted_edges_from( [ (node1, node2, weight) ] )
         else:
-            self.graph.add_weighted_edges_from( [ (node1, node2, 1) ] )
+            self.graf.add_weighted_edges_from( [ (node1, node2, 1) ] )
 
     def create_weighted_edges(self, weighted_edge_list):
-        self.graph.add_weighted_edges_from(weighted_edge_list)
+        self.graf.add_weighted_edges_from(weighted_edge_list)
         
     def return_neighbours(self, node):
-        for n, nbrs in self.graph.adjacency_iter():
+        for n, nbrs in self.graf.adjacency_iter():
             if n == node:
                 return nbrs
     
