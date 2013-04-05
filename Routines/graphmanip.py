@@ -10,19 +10,41 @@ Created on Apr 3, 2013
 def get_max_weighted_edges(graph, node_name):
     maxw = 0
     maxl = []
-    for n, nbrs in graph.adjacency_iter():
+    for n, nbrs in graph.graf.adjacency_iter():
         if n == node_name:
             for nbr, eattr in nbrs.items():
                 weight = eattr['weight']
                 if weight > maxw:
                     maxw = weight
-                    maxl = [(nbr, graph.node[nbr]['label'])]
+                    maxl = [(nbr, graph.graf.node[nbr]['CLID'])]
                 elif weight == maxw:
-                    maxl.append((nbr, graph.node[nbr]['label']))
+                    maxl.append((nbr, graph.graf.node[nbr]['CLID']))
     return (maxw, maxl)
 
 
-def change_node_label(graph, node_name, new_label):
-    old_label = graph.node[node_name]['label']
-    graph.node[node_name]['label'] = new_label
+def change_node_cluster(graph, node_name, new_label):
+    old_label = graph.graf.node[node_name]['CLID']
+    graph.graf.node[node_name]['CLID'] = new_label
     return old_label
+
+
+def get_max_weighted_clusters(graph, node_name):
+    maxval = 0
+    maxclustids = []
+    cdict = {}
+    for n, nbrs in graph.graf.adjacency_iter():
+        if n == node_name:
+            for nbr, eattr in nbrs.items():
+                weight = eattr['weight']
+                cl = graph.graf.node[nbr]['CLID']
+                if cdict.__contains__(cl):
+                    cdict[cl] += weight
+                else:
+                    cdict[cl] = weight
+    for cl, weight in cdict.itervalues():
+        if maxval < weight:
+            maxval = weight
+            maxclustids = [cl]
+        elif maxval == weight:
+            maxclustids.append(cl)
+    return maxclustids
