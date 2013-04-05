@@ -20,11 +20,11 @@ class Cluster():
         self.node_list = []
         self.label = ID
         
-    def add_node(self, ID):
+    def add_node(self, name):
         '''
-        Adds a node's ID to the list of a cluster.
+        Adds a node to the cluster.
         '''
-        self.node_list.append(ID)
+        self.node_list.append(name)
         
     def remove_node(self, g, ID):
         if not self.node_list.__contains__(ID):
@@ -34,3 +34,6 @@ class Cluster():
             return self.label
         else:
             return None
+        
+    def strength(self):
+        return len(self.node_list)

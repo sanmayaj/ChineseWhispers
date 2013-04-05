@@ -36,7 +36,7 @@ class Graph():
         self.IDAllotter = IDClass()
     
     def create_node(self, node_data):
-        self.graf.add_node(node_data, { 'label' : self.IDAllotter.allot_id() })
+        self.graf.add_node(node_data, { 'CLID' : self.IDAllotter.allot_id() })
         
     def create_edge(self, node1, node2, weight = None):
         if weight:
