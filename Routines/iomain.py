@@ -7,9 +7,10 @@ Created on Apr 3, 2013
 from graph import Graph
 from cluster import Cluster
 from graphmanip import *
+from ioaux import file_input_test_data as input_from_file
 
 if __name__ == '__main__':
-    n = raw_input()
+    '''n = raw_input()
     g = Graph()
     lclusters = []
     for i in range(n):
@@ -23,4 +24,13 @@ if __name__ == '__main__':
         c = Cluster(ID = g.graf.node[node_name]['CLID'])
         c.add_node(node_name)
         #c.add_node(g.graf.node[node_name]['label'])
-        lclusters.append(c)
+        lclusters.append(c)'''
+    g = Graph()
+    g = input_from_file()
+    clustersli = []
+    for node_name in g.nodes():
+        c = Cluster(ID = get_max_weighted_clusters(g, node_name))
+        c.add_node(node_name)
+        change_node_cluster(g, node_name, c.label)
+        clustersli.append(c)
+    
