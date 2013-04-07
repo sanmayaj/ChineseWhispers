@@ -45,7 +45,7 @@ class Graph():
             self.graf.add_weighted_edges_from( [ (node1, node2, 1) ] )
 
     def create_weighted_edges(self, weighted_edge_list):
-        self.graf.add_weighted_edges_from(weighted_edge_list)
+        self.graf.add_weighted_edges_from(ebunch = weighted_edge_list)
         
     def return_neighbours(self, node):
         for n, nbrs in self.graf.adjacency_iter():
