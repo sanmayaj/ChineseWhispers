@@ -48,3 +48,11 @@ def get_max_weighted_clusters(graph, node_name):
         elif maxval == weight:
             maxclustids.append(cl)
     return maxclustids
+
+
+def create_weighted_edges_list(node_data_dict):
+    weighted_nodes_li = []
+    for node_name, node_data in node_data_dict.itervalues():
+        for nbr, weight in node_data:
+            weighted_nodes_li.append(tuple([node_name, nbr, weight]))
+    return weighted_nodes_li
