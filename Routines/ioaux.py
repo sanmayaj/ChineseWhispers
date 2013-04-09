@@ -35,11 +35,10 @@ def file_input_test_data():
     nodes = []
     for tagdata in test_data.readlines():
         tags = tagdata.split(',')
-        nodes.append(tuple(lineno, tags))
+        nodes.append(tuple([lineno, tags]))
         lineno += 1
     test_data.close()
     node_data = {}
-    #lineno = 0
     for i, tags in nodes:
         for j in range(i + 1, len(nodes)):
             weight = calc_weight(tags, nodes[j][1])
@@ -50,6 +49,9 @@ def file_input_test_data():
                     node_data[i] = [(j, weight)]
         i += 1
     graph_data = create_weighted_edges_list(node_data)
+    #print graph_data
     g = Graph()
+    for i in range(lineno):
+        g.create_node(i)
     g.create_weighted_edges(graph_data)
     return g
