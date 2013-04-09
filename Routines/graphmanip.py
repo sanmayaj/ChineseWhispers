@@ -34,14 +34,15 @@ def get_max_weighted_clusters(graph, node_name):
     cdict = {}
     for n, nbrs in graph.graf.adjacency_iter():
         if n == node_name:
-            for nbr, eattr in nbrs.items():
+            for nbr, eattr in nbrs.iteritems():
                 weight = eattr['weight']
+                #print graph.graf.node[nbr]
                 cl = graph.graf.node[nbr]['CLID']
                 if cdict.__contains__(cl):
                     cdict[cl] += weight
                 else:
                     cdict[cl] = weight
-    for cl, weight in cdict.itervalues():
+    for cl, weight in cdict.iteritems():
         if maxval < weight:
             maxval = weight
             maxclustids = [cl]
@@ -52,7 +53,7 @@ def get_max_weighted_clusters(graph, node_name):
 
 def create_weighted_edges_list(node_data_dict):
     weighted_nodes_li = []
-    for node_name, node_data in node_data_dict.itervalues():
+    for node_name, node_data in node_data_dict.iteritems():
         for nbr, weight in node_data:
             weighted_nodes_li.append(tuple([node_name, nbr, weight]))
     return weighted_nodes_li
