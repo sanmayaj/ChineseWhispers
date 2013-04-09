@@ -13,13 +13,13 @@ class IDClass():
     last = int()
     
     def __init__(self):
-        self.last = 0
+        self.last = -1
     
     def allot_id(self):
         self.last += 1
         return self.last
     
-
+IDAllotter = IDClass()
 class Graph():
     '''
     Creates a graph using Networkx Library.
@@ -33,10 +33,10 @@ class Graph():
         '''
         self.graf = nx.Graph()
         self.graf.clear()
-        self.IDAllotter = IDClass()
     
     def create_node(self, node_data):
-        self.graf.add_node(node_data, { 'CLID' : self.IDAllotter.allot_id() })
+        v = IDAllotter.allot_id()
+        self.graf.add_node(node_data, { 'CLID' : v })
         
     def create_edge(self, node1, node2, weight = None):
         if weight:
