@@ -8,5 +8,10 @@ import random
 
 def random_cluster(li):
     length = len(li)
-    x = random.randint(0, length - 1)
-    return li[x]
+    if length > 1:
+        x = random.randint(0, length - 1)
+        return li[x]
+    elif length == 1:
+        return li[0]
+    if li == []:
+        return None
