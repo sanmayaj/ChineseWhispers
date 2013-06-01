@@ -55,3 +55,15 @@ class Cluster():
     def strength(self):
         #return len(self.node_list)
         return self.cohesion
+    
+    def new_node_examination(self, new_node_tags):
+        new_cohesion_count = self.cohesion_count
+        for tag in new_node_tags:
+            if tag in self.tags_contained:
+                new_cohesion_count += 1
+        new_node_tag_count = self.node_tag_count + len(new_node_tags)
+        new_cohesion = new_cohesion_count/ new_node_tag_count
+        if new_cohesion > self.cohesion:
+            return True
+        else:
+            return False
