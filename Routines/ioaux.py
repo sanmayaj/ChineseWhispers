@@ -34,6 +34,7 @@ def file_input_test_data():
     lineno = 0
     nodes = []
     for tagdata in test_data.readlines():
+        tagdata = tagdata.rstrip()
         tags = tagdata.split(',')
         nodes.append(tuple([lineno, tags]))
         lineno += 1
@@ -51,7 +52,7 @@ def file_input_test_data():
     graph_data = create_weighted_edges_list(node_data)
     #print graph_data
     g = Graph()
-    for i in range(lineno):
-        g.create_node(i)
+    for node in nodes:
+        g.create_node(node[0], node[1])
     g.create_weighted_edges(graph_data)
     return g

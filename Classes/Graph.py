@@ -34,9 +34,9 @@ class Graph():
         self.graf = nx.Graph()
         self.graf.clear()
     
-    def create_node(self, node_data):
+    def create_node(self, node_name, node_data):
         v = IDAllotter.allot_id()
-        self.graf.add_node(node_data, { 'CLID' : v })
+        self.graf.add_node(node_name, { 'CLID' : v, 'tags' : node_data })
         
     def create_edge(self, node1, node2, weight = None):
         if weight:

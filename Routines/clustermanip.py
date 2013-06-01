@@ -15,3 +15,22 @@ def random_cluster(li):
         return li[0]
     if li == []:
         return None
+    
+def  probabilistic_best_cluster(node_data, li):
+    if li == []:
+        return None
+    elif li.__len__() == 1:
+        return li[0] if li[0].new_node_examination(node_data) else None
+    best_p_fact = 0.0
+    for cluster in li:
+        common = 0
+        for tag in node_data:
+            if tag in cluster.tags_contained:
+                common += 1
+        p_fact = common / len(node_data)
+        if best_p_fact < p_fact:
+            best_p_fact = p_fact
+            best_fit_cluster = cluster
+        elif best_p_fact == p_fact and cluster.new_node_examination(node_data):
+            best_fit_cluster = cluster
+    return best_fit_cluster
