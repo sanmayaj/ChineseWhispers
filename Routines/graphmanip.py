@@ -6,6 +6,7 @@ Created on Apr 3, 2013
 
 #from graph import Graph
 #import networkx as nx
+import clusterglobals
 
 def get_max_weighted_edges(graph, node_name):
     maxw = 0
@@ -48,7 +49,12 @@ def get_max_weighted_clusters(graph, node_name):
             maxclustids = [cl]
         elif maxval == weight:
             maxclustids.append(cl)
-    return maxclustids
+    clusterlist = []
+    for clustid in maxclustids:
+        if clustid in clusterglobals.clusters_list:
+            clusterlist.append(clusterglobals.get_cluster(clustid))
+    #return maxclustids
+    return clusterlist
 
 
 def create_weighted_edges_list(node_data_dict):

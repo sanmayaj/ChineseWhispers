@@ -5,6 +5,7 @@ Created on Apr 5, 2013
 '''
 
 from graphmanip import create_weighted_edges_list
+from clustermanip import create_clusters
 from graph import Graph
 
 def input_weighted_edges():
@@ -39,6 +40,7 @@ def file_input_test_data():
         nodes.append(tuple([lineno, tags]))
         lineno += 1
     test_data.close()
+    create_clusters(nodes)
     node_data = {}
     for i, tags in nodes:
         for j in range(i + 1, len(nodes)):
