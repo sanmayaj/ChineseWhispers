@@ -5,6 +5,8 @@ Created on Apr 3, 2013
 '''
 
 import random
+import clusterglobals
+from cluster import Cluster
 
 def random_cluster(li):
     length = len(li)
@@ -34,3 +36,9 @@ def  probabilistic_best_cluster(node_data, li):
         elif best_p_fact == p_fact and cluster.new_node_examination(node_data):
             best_fit_cluster = cluster
     return best_fit_cluster
+
+def create_clusters(node_data):
+    for node_name, node_tags in node_data:
+        c =  Cluster(ID = int(node_name))
+        c.add_node(node_name, node_tags)
+        clusterglobals.clusters_list.append(c)
