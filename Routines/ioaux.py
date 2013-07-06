@@ -31,7 +31,8 @@ def calc_weight(li1 = None, li2 = None):
     return count
 
 def file_input_test_data():
-    test_data = file(r'C:\Users\Sanmaya Jolly\Documents\influential_bloggers_tags_data.txt')
+    test_data = file(r'C:\Users\Sanmaya Jolly\Documents\trial.txt')
+    #test_data = file(r'C:\Users\Sanmaya Jolly\Documents\influential_bloggers_tags_data.txt')
     lineno = 0
     nodes = []
     for tagdata in test_data.readlines():
