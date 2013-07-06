@@ -7,6 +7,8 @@ Created on Apr 3, 2013
 #from graph import Graph
 #import networkx as nx
 import clusterglobals
+from clustermanip import random_cluster
+from clusterglobals import replace_cluster, get_cluster
 
 def get_max_weighted_edges(graph, node_name):
     maxw = 0
@@ -50,9 +52,9 @@ def get_max_weighted_clusters(graph, node_name):
         elif maxval == weight:
             maxclustids.append(cl)
     clusterlist = []
-    for clustid in maxclustids:
-        if clustid in clusterglobals.clusters_list:
-            clusterlist.append(clusterglobals.get_cluster(clustid))
+    for clust in clusterglobals.clusters_list:
+        if clust.label in maxclustids:
+            clusterlist.append(clusterglobals.get_cluster(clust.label))
     #return maxclustids
     return clusterlist
 
@@ -63,3 +65,26 @@ def create_weighted_edges_list(node_data_dict):
         for nbr, weight in node_data:
             weighted_nodes_li.append(tuple([node_name, nbr, weight]))
     return weighted_nodes_li
+
+def random_classification(graph):
+    for node in graph.graf.nodes():
+        clusters_li = get_max_weighted_clusters(graph, node)
+        best_cluster = random_cluster(clusters_li)
+        if best_cluster:
+            old_cluster_id = graph.graf.node[node]['CLID']
+            tags = graph.graf.node[node]['tags']
+            old_cluster = get_cluster(old_cluster_id)
+            st = old_cluster.remove_node(graph, node)
+            if st == None:
+                replace_cluster(old_cluster)
+            else:
+                replace_cluster(old_cluster, remove = True)
+            best_cluster.add_node(node, tags)
+            replace_cluster(best_cluster)
+            change_node_cluster(graph, node, best_cluster.label)
+        else:
+            pass
+        #clusterglobals.print_clusters()
+
+def calculated_clustering(graph):
+    pass
